@@ -85,6 +85,27 @@ describe "Authentication" do
         
       end
     end
+    
+    describe "for signed-in users" do
+      let(:user) { FactoryGirl.create(:user) }
+
+      before { sign_in user }
+      
+      describe "in the Users controller" do
+
+        describe "visiting the new action" do
+          before {  get new_user_path(user) }
+          specify { response.should redirect_to(root_path) }
+        end
+        
+        describe "submitting a PUT request to the Users#new - create action" do
+          #DID NOT QUITE GET THE TEST, MAY BE NEED TO PASS PARAMETERS
+          #before {  post new_user_path(user) }
+          #specify { response.should redirect_to(root_path) }
+        end
+        
+      end
+    end
 
     describe "as wrong user" do
       let(:user) { FactoryGirl.create(:user) }
